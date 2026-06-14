@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secuencia del Maniquí — Portada Oficial</title>
+    <style>
+        :root {
+            --bg-color: #050508;
+            --accent-red: #7a0000;
+            --bright-red: #ff1212;
+            --neon-glow: rgba(255, 18, 18, 0.7);
+            --text-main: #e1e1e8;
+            --rec-color: #ff2222;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* --- PORTADA CINEMATOGRÁFICA ÚNICA --- */
+        .cover-page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #0c0c12 0%, #020204 100%);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .cover-hud-rec {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: var(--rec-color);
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cover-hud-rec::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--rec-color);
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        /* Sistema de Arma Realista Superior Derecho */
+        .weapon-system {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            width: 220px;
+            height: 130px;
+            z-index: 15;
+        }
+
+        /* Silueta geométrica optimizada para simular una pistola semiautomática real */
+        .weapon-silhouette {
+            position: absolute;
+            right: 0;
+            top: 15px;
+            width: 160px;
+            height: 100px;
+            background: linear-gradient(135deg, #16161f 0%, #08080c 100%);
+            clip-path: polygon(
+                0% 18%, 100% 18%, 100% 23%, 98% 26%, 98% 46%, 
+                91% 48%, 88% 50%, 82% 98%, 65% 98%, 71% 52%, 
+                60% 52%, 58% 56%, 52% 56%, 50% 48%, 42% 48%, 
+                41% 32%, 0% 32%
+            );
+            opacity: 0.95;
+            box-shadow: inset -2px -2px 8px rgba(0,0,0,0.9), inset 2px 2px 4px rgba(255,255,255,0.08);
+            filter: drop-shadow(-6px 8px 15px rgba(0,0,0,0.9));
+        }
+
+        .muzzle-flash {
+            position: absolute;
+            left: -32px;
+            top: 22px;
+            width: 55px;
+            height: 35px;
+            background: radial-gradient(circle, #ffffff 15%, #ffcc00 45%, #ff3300 75%, rgba(255,0,0,0) 100%);
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(1px);
+            animation: flash-loop 0.4s infinite steps(2);
+        }
+
+        /* Bala Real en Vuelo (Ojiva + Casquillo) */
+        .bullet-loop {
+            position: absolute;
+            left: -35px;
+            top: 34px;
+            width: 26px;
+            height: 12px;
+            z-index: 20;
+            animation: bullet-flight 1.2s infinite linear;
+        }
+
+        /* Casquillo de bronce real */
+        .bullet-casing {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 12px;
+            background: linear-gradient(180deg, #ffe680 0%, #cc9900 40%, #997300 70%, #554000 100%);
+            border-radius: 1px 0 0 1px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        }
+
+        /* Ojiva real con aleación de cobre/plomo */
+        .bullet-tip {
+            position: absolute;
+            left: 0;
+            top: 1px;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(180deg, #ffa64d 0%, #d96614 50%, #8c3b06 100%);
+            border-top-left-radius: 80% 50%;
+            border-bottom-left-radius: 80% 50%;
+        }
+
+        /* Título Principal */
+        .title-container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.95);
+            line-height: 1.2;
+        }
+
+        .title-maniqui {
+            color: var(--bright-red);
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(255, 18, 18, 0.6);
+            animation: blood-pulse 2s infinite alternate;
+        }
+
+        /* Hilos de sangre en los extremos */
+        .title-maniqui::before, .title-maniqui::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(180deg, var(--bright-red) 70%, #7a0000 100%);
+            width: 4px;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 2px 10px var(--bright-red);
+            pointer-events: none;
+        }
+
+        .title-maniqui::before {
+            left: 5%;
+            top: 90%;
+            animation: blood-drip-loop 3s infinite ease-in-out;
+        }
+
+        .title-maniqui::after {
+            right: 5%;
+            top: 90%;
+            animation: blood-drip-loop 4.2s infinite ease-in-out;
+        }
+
+        .sub-genre {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 7px;
+            color: var(--bright-red);
+            margin-top: 18px;
+            position: relative;
+            text-shadow: 0 0 8px rgba(255, 18, 18, 0.5);
+            animation: blood-pulse 2.5s infinite alternate;
+        }
+
+        .sub-genre::before, .sub-genre::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(180deg, var(--bright-red) 60%, #500000 100%);
+            width: 3px;
+            border-radius: 0 0 3px 3px;
+            pointer-events: none;
+        }
+
+        .sub-genre::before {
+            left: 30%;
+            top: 95%;
+            animation: blood-drip-loop 3.5s infinite ease-in-out;
+        }
+
+        .sub-genre::after {
+            right: 30%;
+            top: 95%;
+            animation: blood-drip-loop 2.8s infinite ease-in-out;
+        }
+
+        /* Bloque de Metadatos Unificado */
+        .meta-info {
+            margin-top: 55px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .meta-author {
+            font-family: monospace;
+            letter-spacing: 5px;
+            color: #ff3b3b;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1;
+            position: relative;
+            animation: neon-flicker 3s infinite alternate;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes flash-loop {
+            0%, 100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+        }
+
+        @keyframes bullet-flight {
+            0% { transform: translateX(0) scale(1); opacity: 0; }
+            3% { opacity: 1; }
+            50% { transform: translateX(-220px) scale(0.95); opacity: 1; }
+            75% { opacity: 0; }
+            100% { transform: translateX(0) scale(1); opacity: 0; }
+        }
+
+        @keyframes blood-drip-loop {
+            0% { height: 0px; opacity: 0; }
+            15% { opacity: 1; }
+            50% { height: 38px; opacity: 1; }
+            85% { opacity: 1; }
+            100% { height: 0px; opacity: 0; }
+        }
+
+        @keyframes blood-pulse {
+            0% { filter: drop-shadow(0 0 4px rgba(255,0,0,0.4)); }
+            100% { filter: drop-shadow(0 0 14px rgba(255,0,0,0.85)); }
+        }
+
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 4px #7a0000, 0 0 10px var(--bright-red), 0 0 15px var(--neon-glow);
+                color: #ff3b3b;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                color: #3a0000;
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style></head><body>
+
+    <!-- --- PORTADA INTERACTIVA OFICIAL --- -->
+    <div class="cover-page">
+        <div class="cover-hud-rec">● LIVE MONITOR</div>
+        
+        <!-- Sistema de Arma Real con Proyectil Fidedigno -->
+        <div class="weapon-system">
+            <div class="weapon-silhouette"></div>
+            <div class="muzzle-flash"></div>
+            <div class="bullet-loop">
+                <div class="bullet-tip"></div>
+                <div class="bullet-casing"></div>
+            </div>
+        </div>
+
+        <div class="title-container">
+            <h1 class="main-title">
+                Secuencia del <br>
+                <span class="title-maniqui">Maniquí</span>
+            </h1>
+            <span class="sub-genre" contenteditable="true">Psychological Thriller</span>
+        </div>
+
+        <!-- Metadatos Limpios: Solo Autoría -->
+        <div class="meta-info">
+            <div class="meta-author" contenteditable="true">MATIAS MONTILLA</div>
+        </div>
+    </div>
+
+</body></html>
